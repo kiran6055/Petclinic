@@ -1,0 +1,17 @@
+we need to installapachet tomcat
+https://dlcdn.apache.org/tomcat/tomcat-$TOMCAT_MAJOR_VERSION/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+here TOMCAT_MAJOR_VERSION is 10
+TOMCAT_VERSION is 10.1.19
+
+we need to to do untar the file tar -xvzf filename
+then change the ownership of file from root to ec2-user sudo chown -R ec2-user filename
+go to conf/context.xml if we need to add any resources this is optional
+go to conf/tomcat-users.xml
+uncomment users in it and give password to login manager or server in tomcat
+or we can add new users at the lastline above
+<user username="admin" password="admin@123" role="admin-gui, manager-gui"\> like this we need to add
+do find / - name context.xml you will get context.xml files in webapps mostly it will be 4 files comment valves in it by using <!-- in the begining and --> at the end
+copy the .war file and place it in webapps
+after that do bin/sh startup.sh to start tomat sh shutdown.sh to stop the tomcat 
+you can check sudo netstat -lntp the port number of tomcat is 8080 and it requires java to run tomcat as prereuqsite you need to check java installed or not
+then do curl http://localhost:8080/"warfilename which we places in webapps" you will be redirected to the app
